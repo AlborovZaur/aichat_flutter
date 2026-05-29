@@ -38,7 +38,6 @@ class _StatsScreenState extends State<StatsScreen> {
     final prefs = await SharedPreferences.getInstance();
     
     for (var model in _models) {
-      // Ищем данные по ключу, который создали в chat_screen.dart
       final int tokens = prefs.getInt('tokens_$model') ?? 0;
       _modelStats[model] = tokens;
     }
