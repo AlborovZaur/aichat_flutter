@@ -1,16 +1,54 @@
-# aichat_flutter
+# AI Chat Application (Flutter / Dart)
 
-A new Flutter project.
+Мобильное приложение для общения с искусственным интеллектом, построенное на базе фреймворка **Flutter** и языка **Dart**. Проект разработан в рамках перехода со старого Python-стека (Flet) на нативную мобильную разработку для оптимизации производительности и улучшения пользовательского опыта (UX).
 
-## Getting Started
+Приложение интегрировано с API-провайдерами **VseGPT.ru** и **OpenRouter.ai**, предоставляя доступ как к бесплатным, так и к флагманским коммерческим моделям (включая DeepSeek V4 Pro, OpenAI GPT-4.1 Nano, Claude-3 Haiku и Laguna).
 
-This project is a starting point for a Flutter application.
+## 🚀 Ключевые особенности и функционал
 
-A few resources to get you started if this is your first Flutter project:
+*   **Многостраничная архитектура (4 экрана):**
+    *   `Чат` — интерактивное диалоговое окно с поддержкой динамического переключения моделей на лету.
+    *   `Настройки` — изолированное безопасное хранение API-ключей для каждого провайдера отдельно (`shared_preferences`).
+    *   `Статистика` — детализированный покомпонентный учёт потраченных токенов (Prompt/Completion) в разрезе каждой используемой модели.
+    *   `График` — визуализация финансовых расходов и потребления токенов по дням недели на базе библиотеки `fl_chart`.
+*   **Глубокая оптимизация:**
+    *   Размер итогового APK-пакета сокращён **в 3.5 раза** (с 74 МБ на Python до 21.5 МБ на Flutter) благодаря компиляции в нативный машинный код C/C++ и технологии Tree Shaking для ресурсов и шрифтов.
+    *   Реализовано раздельное хранение токенов конфигурации — при смене провайдера в настройках сохранённые ключи автоматически подставляются в валидатор, исключая необходимость ручного ввода.
+*   **Кастомизация:** Интегрирована уникальная нативная иконка приложения, адаптированная под различные разрешения экранов Android-устройств.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠 Стек технологий
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*   **Framework:** Flutter (v3.24+)
+*   **Language:** Dart
+*   **State Management & UI:** StatefulWidget, IndexedStack, DropdownButton, Dynamic ListView
+*   **Networking:** HTTP-клиент, REST API, JSON Serialization/Deserialization
+*   **Local Storage:** SharedPreferences (нативное асинхронное хранилище Android)
+*   **Data Visualization:** fl_chart (построение векторов и графиков затрат)
+
+## 📁 Структура проекта
+
+```text
+lib/
+│
+├── main.dart                 # Точка входа приложения, конфигурация тем и BottomNavigationBar
+└── screens/
+    ├── chat_screen.dart      # Логика чата, HTTP-запросы к API и перехват usage-токенов
+    ├── settings_screen.dart  # Конфигурация провайдеров и изолированное сохранение токенов
+    ├── stats_screen.dart     # Экран аналитики потребления ресурсов моделями
+    └── expenses_screen.dart  # Экран генерации еженедельного графика расходов
+```
+
+## 📦 Как запустить проект локально
+
+1. Убедитесь, что у вас установлен Flutter SDK:
+   ```bash
+   flutter doctor
+   ```
+2. Склонируйте репозиторий:
+   ```bash
+   git clone https://github.com
+   ```
+3. Перейдите в папку проекта и соберите release-версию APK:
+   ```bash
+   flutter build apk --release
+   ```
