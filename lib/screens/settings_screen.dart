@@ -24,7 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _selectedProvider = prefs.getString('api_provider') ?? 'OpenRouter';
-      // УМНАЯ ЗАГРУЗКА: Подгружаем ключ именно для текущего выбранного провайдера
+      // Подгружаем ключ именно для текущего выбранного провайдера
       _apiKeyController.text = prefs.getString('api_key_$_selectedProvider') ?? '';
     });
   }
@@ -35,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     
     await prefs.setString('api_provider', _selectedProvider);
-    // УМНОЕ СОХРАНЕНИЕ: Записываем ключ в его личную ячейку памяти
+    // Записываем ключ в его личную ячейку памяти
     await prefs.setString('api_key_$_selectedProvider', _apiKeyController.text);
     
     setState(() => _isLoading = false);
@@ -57,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _selectedProvider = value;
-      // МГНОВЕННАЯ СМЕНА: При переключении списка поле ввода само обновляется нужным ключом!
+      // При переключении списка поле ввода само обновляется нужным ключом!
       _apiKeyController.text = prefs.getString('api_key_$value') ?? '';
     });
   }
